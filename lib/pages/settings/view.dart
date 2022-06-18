@@ -105,9 +105,6 @@ class SettingsPage extends StatelessWidget {
                     builder: (_) {
                       logic.altIoTextController.clear();
                       return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                        ),
                         title: Text('Alternative Data I/O'.tr),
                         content: TextField(
                           decoration: InputDecoration(
@@ -167,9 +164,6 @@ class SettingsPage extends StatelessWidget {
                     builder: (_) {
                       logic.altIoTextController.clear();
                       return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                        ),
                         title: Text('Password Hash Generator'.tr),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,

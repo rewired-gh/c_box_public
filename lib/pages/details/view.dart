@@ -159,9 +159,6 @@ class DetailsPage extends StatelessWidget {
                 context: context,
                 builder: (_) {
                   return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                    ),
                     title: Text('Confirm Password'.tr),
                     content: TextField(
                       autofocus: true,

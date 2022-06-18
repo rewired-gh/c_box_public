@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
         title: Text(
           TITLE_STRING,
           style: GoogleFonts.ubuntu(
-            fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -42,9 +41,6 @@ class HomePage extends StatelessWidget {
                 builder: (_) {
                   logic.getUsername();
                   return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                    ),
                     title: Text('Cloud Data Sync'.tr),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -162,10 +158,6 @@ class HomePage extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16.0)),
-                              ),
                               title: Text('Be careful!'.tr),
                               content: Text(
                                   'Are you sure you want to delete "%0\$" at %1\$? This action cannot be undone.'

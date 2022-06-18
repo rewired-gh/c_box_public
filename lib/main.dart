@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'common/i18n_service.dart';
-import 'common/strings.dart';
 import 'pages/details/view.dart';
 import 'pages/home/view.dart';
 
@@ -29,15 +28,19 @@ class MyApp extends StatelessWidget {
         Get.updateLocale(I18nService.locale);
       },
       theme: ThemeData(
-        fontFamily: 'Noto Sans',
-        primarySwatch: Colors.deepOrange,
-        textTheme: TextTheme(
-          headline6: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
+          useMaterial3: true,
+          brightness: Brightness.light,
+          primarySwatch: Colors.green,
+          fontFamily: 'Noto Sans',
+          cardTheme: CardTheme(surfaceTintColor: Theme.of(context).canvasColor),
+          dialogTheme: DialogTheme(
+            titleTextStyle:
+                TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
-        ),
-      ),
+          appBarTheme: AppBarTheme(
+            titleTextStyle:
+                TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+          )),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
