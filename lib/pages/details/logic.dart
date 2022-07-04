@@ -5,6 +5,7 @@ import 'package:c_box/models/page.dart';
 import 'package:c_box/pages/home/logic.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,11 +57,13 @@ class DetailsLogic extends GetxController {
       final secretKey = SecretKey(hash);
 
       final cPage = CPage();
-      cPage.eContent = await encryptAlgorithm.encrypt(
-        utf8.encode(textContentController.text),
-        secretKey: secretKey,
-        nonce: nonce,
-      );
+      cPage.eContent = await compute((List<dynamic> args) async {
+        return await (args[0] as AesGcm).encrypt(
+          utf8.encode(args[1]),
+          secretKey: args[2],
+          nonce: args[3],
+        );
+      }, [encryptAlgorithm, textContentController.text, secretKey, nonce]);
 
       try {
         homeLogic.pageList[index] = json.encode(cPage.toJson());
@@ -80,6 +83,7 @@ class DetailsLogic extends GetxController {
     if (textKeyController.text.isEmpty) {
       return;
     }
+
     final secretBox =
         CPage.fromJson(json.decode(homeLogic.pageList[index])).eContent;
 
@@ -88,10 +92,10 @@ class DetailsLogic extends GetxController {
     final algorithm = AesGcm.with256bits();
     final secretKey = SecretKey(hash);
 
-    textContentController.text = utf8.decode(await algorithm.decrypt(
-      secretBox,
-      secretKey: secretKey,
-    ));
+    textContentController.text = await compute((List<dynamic> args) async {
+      return await utf8.decode(
+          await (args[0] as AesGcm).decrypt(args[1], secretKey: args[2]));
+    }, [algorithm, secretBox, secretKey]);
 
     textKeyController.text = '';
   }

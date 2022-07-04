@@ -83,7 +83,7 @@ class HomeLogic extends GetxController {
         APP_ID_STRING,
         PARSE_SERVER_URL_STRING,
         clientKey: CLIENT_KEY_STRING,
-        autoSendSessionId: false,
+        debug: true,
       );
     }
   }
@@ -120,7 +120,6 @@ class HomeLogic extends GetxController {
 
       if (response.success) {
         user = response.result;
-
         actionOk = await action(user);
       }
 

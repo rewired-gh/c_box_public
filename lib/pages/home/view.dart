@@ -1,3 +1,4 @@
+import 'package:c_box/Widget/card_item.dart';
 import 'package:c_box/common/strings.dart';
 import 'package:c_box/models/global_snack_bar.dart';
 import 'package:c_box/models/string_extension.dart';
@@ -140,49 +141,39 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 86.0),
                 itemCount: logic.titleList.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 1.0, 8.0, 1.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      child: ListTile(
-                        title: Text(logic.titleList[index]),
-                        trailing: Icon(Icons.keyboard_arrow_right_rounded),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 3.0, 12.0, 3.0),
-                        onTap: () {
-                          logic.openPage(index);
-                        },
-                        onLongPress: () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: Text('Be careful!'.tr),
-                              content: Text(
-                                  'Are you sure you want to delete "%0\$" at %1\$? This action cannot be undone.'
-                                      .tr
-                                      .format([logic.titleList[index], index])),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    logic.deletePage(index);
-                                    Get.back();
-                                  },
-                                  child: Text('Yes'.tr),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: Text('No'.tr),
-                                ),
-                              ],
+                  return CardItem(
+                    title: logic.titleList[index],
+                    showTailing: true,
+                    onTap: () {
+                      logic.openPage(index);
+                    },
+                    onLongPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Be careful!'.tr),
+                          content: Text(
+                              'Are you sure you want to delete "%0\$" at %1\$? This action cannot be undone.'
+                                  .tr
+                                  .format([logic.titleList[index], index])),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                logic.deletePage(index);
+                                Get.back();
+                              },
+                              child: Text('Yes'.tr),
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                            TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text('No'.tr),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   );
                 },
               );
